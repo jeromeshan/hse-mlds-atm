@@ -3,6 +3,7 @@ import pandas as pd
 import geopandas as gpd
 from itertools import product
 from geo_functions import *
+from inference_wrap import inference_features
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -119,6 +120,9 @@ enriched_data = pd.concat(utm_data.values()).reset_index(drop=True)
 # Заполняем пропуски в колонках 'объекты в радиусе' на ноль
 mask = enriched_data.columns.str.contains('_in_')
 enriched_data.loc[:, mask] = enriched_data.loc[:, mask].fillna(0)
+
+# Добавляем признаки "area" и "dist" - вызов функции инференса:
+enriched_data = inference_features(enriched_data)
 
 # Сохраняем обработанные данные
 enriched_data.to_csv('../../data/processed/enriched_data.csv', index=False)
