@@ -1,0 +1,50 @@
+<script>
+
+async function postJSON(path, method, data) {
+  try {
+    const response = await fetch(path, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const result = await response.json();
+    if (result.detail) {
+        throw new Error(result.detail.map(e => e.msg).join('; '));
+    }
+    document.getElementById('result').innerText = JSON.stringify(result);
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function f() {
+    let lat = document.getElementById('lat').value;
+    let lon = document.getElementById('lon').value;
+    let atm = document.getElementById('atm').value;
+    postJSON("inference", "POST", {
+        'atm': atm,
+        'lat': lat,
+        'lon': lon        
+    });
+}
+</script>
+
+<pre><form onsubmit="f(this); return false;">
+    <label>Lat: <input id='lat'></label><br>
+    <label>Lon: <input id='lon'></label><br>
+    <label>ATM Group: <select id="atm">
+		<option selected value='32.0'>32.0</option>
+		<option value='496.5'>496.5</option>
+		<option value='1022.0'>1022.0</option>
+		<option value='1942.0'>1942.0</option>
+		<option value='3185.5'>3185.5</option>
+		<option value='5478.0'>5478.0</option>
+		<option value='8083.0'>8083.0</option>
+    </select></label>
+    <br>
+    <button type="submit">&nbsp;Okay&nbsp;</button>
+</form></pre>
+<p><span>Result:&nbsp;&nbsp;</span><span id="result"></span></p>

@@ -1,0 +1,10 @@
+catboost==1.2
+fastapi==0.98.0
+geopandas==0.13.2
+geopy==2.3.0
+numpy==1.24.3
+pandas==1.5.3
+pydantic==1.10.9
+pyproj==3.5.0
+Shapely==2.0.1
+uvicorn==0.22.0
