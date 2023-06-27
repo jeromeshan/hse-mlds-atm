@@ -4,7 +4,7 @@ from dist_area_inference import inference
 FEATURES_PATH = "../../data/inference/inference_features.csv"
 COLS = ['dist', 'area']
 
-def _inference_processing(enriched_data)
+def _inference_processing(enriched_data):
 	x = enriched_data.apply(lambda dfed: inference(dfed['lat'], dfed['lon']), axis=1)
 	dist = x.apply(lambda y:y[0]).tolist()
 	area = x.apply(lambda y:y[1]).tolist()

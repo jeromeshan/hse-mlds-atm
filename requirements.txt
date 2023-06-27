@@ -1,0 +1,8 @@
+geopandas==0.13.2
+geopy==2.3.0
+osmium==3.6.0
+pandas==2.0.2
+pandas==1.4.2
+pyproj==3.6.0
+Requests==2.31.0
+Shapely==2.0.1
